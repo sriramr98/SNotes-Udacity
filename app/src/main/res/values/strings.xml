@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">SNotes</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="logo_of_snotes">Logo of SNotes</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="color_title">Choose a color</string>
+    <string name="colors">choose a color</string>
+    <string name="set_remainder">Set Remainder</string>
+    <string name="delete">Delete</string>
+    <string name="export">Export as .txt</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="notification_channel_display_title">Notes Remainder</string>
+    <string name="send_to">Send To</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!--strings for the about page-->
+    <string name="version_title">Version</string>
+    <string name="rate_title">Rate</string>
+    <string name="rate_desc">Leave a rating in Google Play</string>
+    <string name="report_title">Report</string>
+    <string name="report_desc">Report bugs, request new features or just get in touch</string>
+    <string name="share_title">Share</string>
+    <string name="licenses">Licenses</string>
+    <string name="author_name">Sriram R</string>
+    <string name="author_location">Noida, India</string>
+    <string name="follow_on_github">Follow on Github</string>
+    <string name="donate">Donate</string>
+    <string name="donate_desc">If you like this free app and if you liked it, consider supporting me</string>
+    <string name="progress_title">Please Wait</string>
+    <string name="please_content">Please wait while we authenticate you</string>
+
+    <string name="shortcut_add_label">Add Note</string>
+    <string name="shortcut_disabled_message">No shortcuts</string>
+    <string name="title_activity_nav">NavActivity</string>
+    <string name="title_pin_dialog">Enter Pin</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_title_content_desc">Widget Title</string>
+    <string name="isPinSet">isPinSet</string>
+    <string name="pinProtectionOff">Protection Off</string>
+    <string name="pinProtectionOn">Protection On</string>
+    <string name="pinProtectionTitle">Notes Protection</string>
+    <string name="toolbar_title_protected">Protected</string>
+    <string name="toolbar_title_starred">Starred</string>
+
+</resources>

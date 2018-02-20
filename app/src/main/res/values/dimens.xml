@@ -1,0 +1,29 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+
+    <dimen name="titleTextSize">24sp</dimen>
+    <dimen name="contentTextSize">20sp</dimen>
+
+    <dimen name="noteItemTitle">22sp</dimen>
+    <dimen name="noteItemContent">18sp</dimen>
+    <dimen name="noteItemDate">14sp</dimen>
+
+    <dimen name="fontIconSize">48dp</dimen>
+    <dimen name="textSize">18sp</dimen>
+
+    <dimen name="bottomSheetImage">28dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+
+</resources>
+

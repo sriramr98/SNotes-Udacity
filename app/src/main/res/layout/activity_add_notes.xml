@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_notes_add"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/Theme.AppCompat.Light"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <io.github.mthli.knife.KnifeText
+            android:id="@+id/edt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_notes_add"
+            android:background="@android:color/transparent"
+            android:hint="Content"
+            android:padding="12dp"
+            android:textSize="@dimen/contentTextSize"
+            app:bulletColor="@color/colorAccent"
+            app:bulletGapWidth="4dp"
+            app:bulletRadius="4dp"
+            app:historyEnable="true"
+            app:historySize="20" />
+
+        <EditText
+            android:id="@+id/title_notes_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="Title"
+            android:minLines="1"
+            android:padding="12dp"
+            android:textSize="@dimen/titleTextSize"
+            android:textStyle="bold" />
+
+        <HorizontalScrollView
+            android:id="@+id/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/undo"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_undo" />
+
+                <ImageButton
+                    android:id="@+id/redo"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_redo" />
+
+                <ImageButton
+                    android:id="@+id/bold"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_format_bold" />
+
+                <ImageButton
+                    android:id="@+id/italic"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_format_italic" />
+
+                <ImageButton
+                    android:id="@+id/underline"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_format_underlined" />
+
+                <ImageButton
+                    android:id="@+id/strikethrough"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_strikethrough" />
+
+                <ImageButton
+                    android:id="@+id/bullet"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_format_list_bulleted" />
+
+                <ImageButton
+                    android:id="@+id/quote"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_format_quote" />
+
+                <ImageButton
+                    android:id="@+id/link"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_insert_link" />
+
+                <ImageButton
+                    android:id="@+id/clear"
+                    android:layout_width="@dimen/fontIconSize"
+                    android:layout_height="@dimen/fontIconSize"
+                    android:background="?android:selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:scaleType="center"
+                    app:srcCompat="@drawable/ic_format_clear" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+</LinearLayout>
