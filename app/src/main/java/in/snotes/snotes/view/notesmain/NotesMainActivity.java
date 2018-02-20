@@ -1,6 +1,8 @@
 package in.snotes.snotes.view.notesmain;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -48,7 +50,7 @@ import in.snotes.snotes.view.protected_and_starred.ProtectedActivity;
 import timber.log.Timber;
 
 public class NotesMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NotesAdapter.NotesListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NotesAdapter.NotesListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -100,6 +102,10 @@ public class NotesMainActivity extends AppCompatActivity
 
         tvUserName.setText(mAuth.getCurrentUser().getDisplayName());
         tvUserEmail.setText(mAuth.getCurrentUser().getEmail());
+
+        //  registering the shared prefs change listener
+        SharedPreferences prefs = getSharedPreferences(SharedPrefsUtils.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
+        prefs.registerOnSharedPreferenceChangeListener(this);
 
         isTablet = getResources().getBoolean(R.bool.isTablet);
 
@@ -363,4 +369,25 @@ public class NotesMainActivity extends AppCompatActivity
         startActivity(i);
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getString(R.string.isPinSet))) {
+            boolean isLocked = sharedPreferences.getBoolean(getString(R.string.isPinSet), false);
+            // if the settings is changed to locked, we can't lock all the notes.
+            // We only have to unlock all the notes if the lock is removed
+            if (isLocked) {
+                return;
+            }
+
+            if (notes == null || notes.isEmpty()) {
+                return;
+            }
+
+            for (Note note : notes) {
+                note.setLocked(false);
+            }
+
+            adapter.setNotes(notes);
+        }
+    }
 }

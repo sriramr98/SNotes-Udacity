@@ -9,7 +9,7 @@ public final class SharedPrefsUtils {
 
     private static SharedPreferences prefs;
 
-    private static final String SHARED_PREFS_NAME = "notesPrefs";
+    public static final String SHARED_PREFS_NAME = "notesPrefs";
 
 
     private SharedPrefsUtils() {
