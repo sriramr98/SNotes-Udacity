@@ -48,5 +48,6 @@
     <string name="pinProtectionTitle">Notes Protection</string>
     <string name="toolbar_title_protected">Protected</string>
     <string name="toolbar_title_starred">Starred</string>
+    <string name="configure">Configure</string>
 
 </resources>

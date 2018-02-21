@@ -475,6 +475,8 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
 
         Utils.scheduleAlarm(this, currentNote);
 
+        Toast.makeText(this, "Remainder set", Toast.LENGTH_SHORT).show();
+
         FirebaseUtils.updateNote(this, currentNote);
     }
 

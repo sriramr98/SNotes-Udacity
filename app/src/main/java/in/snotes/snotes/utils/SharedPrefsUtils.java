@@ -10,6 +10,7 @@ public final class SharedPrefsUtils {
     private static SharedPreferences prefs;
 
     public static final String SHARED_PREFS_NAME = "notesPrefs";
+    public static final String DEFAULT_APP_WIDGET_STRING = "aaaa";
 
 
     private SharedPrefsUtils() {
@@ -47,5 +48,15 @@ public final class SharedPrefsUtils {
         prefs.edit().remove("isPinSet").apply();
     }
 
+
+    public static void saveWidgetDataToPrefs(int appWidgetId, String noteId) {
+        prefs.edit()
+                .putString(String.valueOf(appWidgetId), noteId)
+                .apply();
+    }
+
+    public static String getWidgetDataFromPrefs(int appWidgetId) {
+        return prefs.getString(String.valueOf(appWidgetId), DEFAULT_APP_WIDGET_STRING);
+    }
 
 }
