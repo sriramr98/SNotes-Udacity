@@ -105,9 +105,16 @@ public class NoteWidgetConfigureActivity extends Activity implements NoteAdapter
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         Timber.i("Note in widget activity %s", dataSnapshot.toString());
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Note note = FirebaseUtils.getNoteFromSnapshot(snapshot);
-                            notes.add(note);
+                            if (note == null) {
+                                Timber.e("Note is null at widget configuration");
+                                return;
+                            }
+                            // we dont wanna add locked notes
+                            if (!note.getLocked()) {
+                                notes.add(note);
+                            }
                         }
 
                         adapter.addNote(notes);

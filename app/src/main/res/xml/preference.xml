@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="@string/isPinSet"
-        android:summaryOff="@string/pinProtectionOff"
-        android:summaryOn="@string/pinProtectionOn"
-        android:title="@string/pinProtectionTitle" />
+    <EditTextPreference
+        android:defaultValue="@string/pin_default_value"
+        android:key="@string/pin"
+        android:summary="Set Pin for Notes"
+        android:title="Password" />
 
 </PreferenceScreen>

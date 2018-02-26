@@ -1,7 +1,9 @@
 package in.snotes.snotes.view.addnotes;
 
+import android.appwidget.AppWidgetManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,6 +40,7 @@ import in.snotes.snotes.utils.AppConstants;
 import in.snotes.snotes.utils.FirebaseUtils;
 import in.snotes.snotes.utils.Utils;
 import in.snotes.snotes.view.AddNotesBottomSheet;
+import in.snotes.snotes.widget.NoteWidget;
 import io.github.mthli.knife.KnifeText;
 import timber.log.Timber;
 
@@ -143,9 +146,20 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
             } else {
                 // else update the note
                 FirebaseUtils.updateNote(this, currentNote);
+
+                // update all widgets if possible since we cant pin point if there is a widget for this specific note
+                updateAllWidgets();
             }
         }
         super.onBackPressed();
+    }
+
+    private void updateAllWidgets() {
+        Intent updateIntent = new Intent(this, NoteWidget.class);
+        updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(),NoteWidget.class));
+        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+        sendBroadcast(updateIntent);
     }
 
     @OnClick({R.id.bold, R.id.italic, R.id.underline, R.id.strikethrough, R.id.bullet, R.id.quote, R.id.link, R.id.clear, R.id.undo, R.id.redo})

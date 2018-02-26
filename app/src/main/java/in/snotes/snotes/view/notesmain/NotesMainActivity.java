@@ -1,8 +1,6 @@
 package in.snotes.snotes.view.notesmain;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -50,7 +48,7 @@ import in.snotes.snotes.view.protected_and_starred.ProtectedActivity;
 import timber.log.Timber;
 
 public class NotesMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, NotesAdapter.NotesListener, SharedPreferences.OnSharedPreferenceChangeListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NotesAdapter.NotesListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -71,10 +69,11 @@ public class NotesMainActivity extends AppCompatActivity
     private boolean isTablet = false;
     private NotesAdapter adapter;
 
-    private ArrayList<Note> notes = new ArrayList<>();
+    private ArrayList<Note> notes;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference users = FirebaseDatabase.getInstance().getReference(AppConstants.REFERENCE_USERS);
+    private DatabaseReference notesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,14 +102,8 @@ public class NotesMainActivity extends AppCompatActivity
         tvUserName.setText(mAuth.getCurrentUser().getDisplayName());
         tvUserEmail.setText(mAuth.getCurrentUser().getEmail());
 
-        //  registering the shared prefs change listener
-        SharedPreferences prefs = getSharedPreferences(SharedPrefsUtils.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
-        prefs.registerOnSharedPreferenceChangeListener(this);
-
         isTablet = getResources().getBoolean(R.bool.isTablet);
-
-        adapter = new NotesAdapter(this, this);
-
+        notes = new ArrayList<>();
         StaggeredGridLayoutManager layoutManager;
 
         if (isTablet) {
@@ -120,116 +113,18 @@ public class NotesMainActivity extends AppCompatActivity
         }
 
         rvNotesList.setLayoutManager(layoutManager);
+
+        adapter = new NotesAdapter(this, this);
         rvNotesList.setAdapter(adapter);
 
         //TODO load data from REALTIME DATABASE
         String uid = mAuth.getCurrentUser().getUid();
 
         pbNotes.setVisibility(View.VISIBLE);
-        users.child(uid)
-                .child(AppConstants.USER_NOTES)
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        if (pbNotes != null) {
-                            pbNotes.setVisibility(View.GONE);
-                        }
-                        if (dataSnapshot.getValue() == null) {
-                            return;
-                        }
+        notesRef = users.child(uid)
+                .child(AppConstants.USER_NOTES);
 
-                        Timber.i("Data is %s", dataSnapshot.getValue().toString());
-                        Note note = FirebaseUtils.getNoteFromSnapshot(dataSnapshot);
-                        if (note == null) {
-                            return;
-                        }
-                        notes.add(note);
-
-                        if (notes.isEmpty()) {
-                            layoutEmpty.setVisibility(View.VISIBLE);
-                            rvNotesList.setVisibility(View.GONE);
-                            pbNotes.setVisibility(View.GONE);
-                        } else {
-                            layoutEmpty.setVisibility(View.GONE);
-                            rvNotesList.setVisibility(View.VISIBLE);
-                        }
-
-                        adapter.setNotes(notes);
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                        if (dataSnapshot.getValue() == null) {
-                            return;
-                        }
-                        Timber.i("Note changed %s", dataSnapshot.getValue().toString());
-                        Timber.i("Changed string s is %s", s);
-                        Note note = FirebaseUtils.getNoteFromSnapshot(dataSnapshot);
-                        Note noteToRemove = null;
-                        if (note == null) {
-                            return;
-                        }
-                        for (Note n : notes) {
-                            if (n.getTimestamp() == note.getTimestamp()) {
-                                noteToRemove = n;
-                            }
-                        }
-
-                        if (noteToRemove != null) {
-                            Timber.i("Removing note");
-                            notes.remove(noteToRemove);
-                            Timber.i("Adding new note");
-                            notes.add(note);
-                            adapter.setNotes(notes);
-                        }
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.getValue() == null) {
-                            Timber.e("Error on child removed");
-                            return;
-                        }
-                        Note note = FirebaseUtils.getNoteFromSnapshot(dataSnapshot);
-                        if (note == null) {
-                            return;
-                        }
-                        Note noteToRemove = null;
-                        for (Note n : notes) {
-                            if (n.getTimestamp() == note.getTimestamp()) {
-                                noteToRemove = n;
-                            }
-                        }
-
-                        if (noteToRemove != null) {
-                            notes.remove(noteToRemove);
-
-                            if (notes.isEmpty()) {
-                                layoutEmpty.setVisibility(View.VISIBLE);
-                                rvNotesList.setVisibility(View.GONE);
-                                pbNotes.setVisibility(View.GONE);
-                            } else {
-                                layoutEmpty.setVisibility(View.GONE);
-                                rvNotesList.setVisibility(View.VISIBLE);
-                            }
-
-                            adapter.setNotes(notes);
-                            Timber.i("Note removed %s", dataSnapshot.getValue().toString());
-                        }
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
+        notesRef.addChildEventListener(listener);
 
         // This is to manage the fact that if the notes path doesn't contain any notes, no callback from Firebase is Fired.
         if (notes.isEmpty()) {
@@ -242,6 +137,124 @@ public class NotesMainActivity extends AppCompatActivity
         }
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        notesRef.addChildEventListener(listener);
+
+    }
+
+    @Override
+    protected void onPause() {
+//        notes.clear();
+//        Timber.i("Leaving activiy with notes %s", notes.toString());
+//        notesRef.removeEventListener(listener);
+        super.onPause();
+    }
+
+    private ChildEventListener listener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            if (pbNotes != null) {
+                pbNotes.setVisibility(View.GONE);
+            }
+            if (dataSnapshot.getValue() == null) {
+                return;
+            }
+
+            Timber.i("Data is %s", dataSnapshot.getValue().toString());
+            Note note = FirebaseUtils.getNoteFromSnapshot(dataSnapshot);
+            if (note == null) {
+                return;
+            }
+            notes.add(note);
+
+            if (notes.isEmpty()) {
+                layoutEmpty.setVisibility(View.VISIBLE);
+                rvNotesList.setVisibility(View.GONE);
+                pbNotes.setVisibility(View.GONE);
+            } else {
+                layoutEmpty.setVisibility(View.GONE);
+                rvNotesList.setVisibility(View.VISIBLE);
+            }
+
+            adapter.setNotes(notes);
+
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            if (dataSnapshot.getValue() == null) {
+                return;
+            }
+            Timber.i("Note changed %s", dataSnapshot.getValue().toString());
+            Timber.i("Changed string s is %s", s);
+            Note note = FirebaseUtils.getNoteFromSnapshot(dataSnapshot);
+            Note noteToRemove = null;
+            if (note == null) {
+                return;
+            }
+            for (Note n : notes) {
+                if (n.getTimestamp() == note.getTimestamp()) {
+                    noteToRemove = n;
+                }
+            }
+
+            if (noteToRemove != null) {
+                Timber.i("Removing note");
+                notes.remove(noteToRemove);
+                Timber.i("Adding new note");
+                notes.add(note);
+                adapter.setNotes(notes);
+            }
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.getValue() == null) {
+                Timber.e("Error on child removed");
+                return;
+            }
+            Note note = FirebaseUtils.getNoteFromSnapshot(dataSnapshot);
+            if (note == null) {
+                return;
+            }
+            Note noteToRemove = null;
+            for (Note n : notes) {
+                if (n.getTimestamp() == note.getTimestamp()) {
+                    noteToRemove = n;
+                }
+            }
+
+            if (noteToRemove != null) {
+                notes.remove(noteToRemove);
+
+                if (notes.isEmpty()) {
+                    layoutEmpty.setVisibility(View.VISIBLE);
+                    rvNotesList.setVisibility(View.GONE);
+                    pbNotes.setVisibility(View.GONE);
+                } else {
+                    layoutEmpty.setVisibility(View.GONE);
+                    rvNotesList.setVisibility(View.VISIBLE);
+                }
+
+                adapter.setNotes(notes);
+                Timber.i("Note removed %s", dataSnapshot.getValue().toString());
+            }
+
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Timber.e(databaseError.toException());
+        }
+    };
 
     @OnClick(R.id.fab_add_notes)
     void onFabAddNotesClicked() {
@@ -369,25 +382,4 @@ public class NotesMainActivity extends AppCompatActivity
         startActivity(i);
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getString(R.string.isPinSet))) {
-            boolean isLocked = sharedPreferences.getBoolean(getString(R.string.isPinSet), false);
-            // if the settings is changed to locked, we can't lock all the notes.
-            // We only have to unlock all the notes if the lock is removed
-            if (isLocked) {
-                return;
-            }
-
-            if (notes == null || notes.isEmpty()) {
-                return;
-            }
-
-            for (Note note : notes) {
-                note.setLocked(false);
-            }
-
-            adapter.setNotes(notes);
-        }
-    }
 }

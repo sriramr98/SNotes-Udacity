@@ -49,5 +49,11 @@
     <string name="toolbar_title_protected">Protected</string>
     <string name="toolbar_title_starred">Starred</string>
     <string name="configure">Configure</string>
+    <string name="forgot_password_error_sending_mail">Error sending email. Please try again</string>
+    <string name="forgot_password_incorrect_email">Please enter correct Email ID</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
+    <string name="pin">pin</string>
+    <string name="pin_default_value">0000</string>
 
 </resources>

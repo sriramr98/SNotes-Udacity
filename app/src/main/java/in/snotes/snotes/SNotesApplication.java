@@ -6,11 +6,13 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.database.FirebaseDatabase;
 
 import in.snotes.snotes.utils.AppConstants;
 import in.snotes.snotes.utils.FirebaseUtils;
 import in.snotes.snotes.utils.SharedPrefsUtils;
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public class SNotesApplication extends Application {
@@ -19,6 +21,7 @@ public class SNotesApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         Timber.plant(new Timber.DebugTree());
 

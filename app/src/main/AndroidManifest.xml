@@ -44,6 +44,10 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ac0fd1c27fab559e476a05958774e56a8357edbe" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

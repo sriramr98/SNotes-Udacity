@@ -56,6 +56,7 @@ public class NoteWidget extends AppWidgetProvider {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Timber.i("Data snapshot from widget is %s", dataSnapshot.toString());
                         Note note = FirebaseUtils.getNoteFromSnapshot(dataSnapshot);
 
                         if (note == null) {
@@ -67,6 +68,8 @@ public class NoteWidget extends AppWidgetProvider {
                         views.setInt(R.id.widget_parent, "setBackgroundColor", note.getColorOfNote());
                         views.setTextViewText(R.id.widget_title, note.getTitle());
                         views.setTextViewText(R.id.widget_desc, Html.fromHtml(note.getContent()));
+                        // Instruct the widget manager to update the widget
+                        appWidgetManager.updateAppWidget(appWidgetId, views);
                     }
 
 
@@ -76,11 +79,6 @@ public class NoteWidget extends AppWidgetProvider {
                     }
                 });
 
-
-
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     @Override

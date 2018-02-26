@@ -3,6 +3,8 @@ package in.snotes.snotes.view.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.util.Patterns;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -18,8 +20,6 @@ import in.snotes.snotes.view.notesmain.NotesMainActivity;
 import timber.log.Timber;
 
 public class AuthActivity extends AppCompatActivity implements AuthFragment.AuthListener, LoginFragment.LoginListener, RegisterFragment.RegisterListener {
-
-    private static final String TAG = "AuthActivity";
 
     MaterialDialog authDialog;
 
@@ -103,7 +103,32 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
 
     @Override
     public void forgotPassword() {
-        Toast.makeText(this, "Forgot Password", Toast.LENGTH_SHORT).show();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        new MaterialDialog.Builder(this)
+                .title("Enter Email ID")
+                .inputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+                .input(null, null, false, (dialog, input) -> {
+                    if (Patterns.EMAIL_ADDRESS.matcher(input.toString()).matches()) {
+                        auth.sendPasswordResetEmail(input.toString())
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        showForgotPasswordError(getString(R.string.forgot_password_error_sending_mail));
+                                    }
+                                });
+                    } else {
+                        showForgotPasswordError(getString(R.string.forgot_password_incorrect_email));
+                    }
+                }).show();
+    }
+
+    private void showForgotPasswordError(String content) {
+        new MaterialDialog.Builder(this)
+                .title(getString(R.string.error))
+                .content(content)
+                .neutralText(getString(R.string.ok))
+                .show();
     }
 
     @Override
@@ -139,7 +164,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
             new MaterialDialog.Builder(this)
                     .title("Error")
                     .content(content)
-                    .neutralText("Ok")
+                    .neutralText(getString(R.string.ok))
                     .show();
         }
 

@@ -29,7 +29,7 @@ public final class NotesServiceUtils {
         String userName = intent.getStringExtra("user-name");
 
         if (userUid == null || userName == null) {
-            Timber.e("Error in either useruid or name");
+            Timber.e("Error in either user uid or name");
             return;
         }
 
@@ -38,7 +38,6 @@ public final class NotesServiceUtils {
         user.put("name", userName);
         user.put("pin", password);
 
-        SharedPrefsUtils.setIsPinSet(false);
         SharedPrefsUtils.setPin(password);
 
         mDatabase.getReference(AppConstants.REFERENCE_USERS).child(userUid)
@@ -86,9 +85,6 @@ public final class NotesServiceUtils {
                         if (dataSnapshot.child("pin").exists()) {
                             String pin = dataSnapshot.child("pin").getValue().toString();
                             SharedPrefsUtils.setPin(pin);
-                            if (!Objects.equals(pin, "0000")) {
-                                SharedPrefsUtils.setIsPinSet(true);
-                            }
                         } else {
                             Timber.e("Pin doesn't exist in snapshot");
                         }
