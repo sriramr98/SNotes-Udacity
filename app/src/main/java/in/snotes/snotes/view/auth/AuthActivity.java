@@ -66,7 +66,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show();
                         authDialog.dismiss();
                         startSyncServiceOnLogin();
                         goToMainActivity();
@@ -97,7 +97,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     public void navToRegister() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_auth, new RegisterFragment())
-                .addToBackStack("register-fragment")
+                .addToBackStack(AppConstants.TAG_REGISTER_FRAGMENT)
                 .commit();
     }
 
@@ -105,14 +105,14 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     public void forgotPassword() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         new MaterialDialog.Builder(this)
-                .title("Enter Email ID")
+                .title(getString(R.string.enter_email_id))
                 .inputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
                 .input(null, null, false, (dialog, input) -> {
                     if (Patterns.EMAIL_ADDRESS.matcher(input.toString()).matches()) {
                         auth.sendPasswordResetEmail(input.toString())
                                 .addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(this, getString(R.string.check_your_email), Toast.LENGTH_SHORT).show();
                                     } else {
                                         showForgotPasswordError(getString(R.string.forgot_password_error_sending_mail));
                                     }
@@ -153,16 +153,16 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     private void showRegisterErrorDialog(Exception e) {
         String content = null;
         if (e instanceof FirebaseAuthUserCollisionException) {
-            content = "Sorry. The email ID is already registered. Try logging in if it's your Email ID or check your Email";
+            content = getString(R.string.error_auth_user_collision);
         } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
-            content = "Please check your Email ID and Password.";
+            content = getString(R.string.error_auth_invalid);
         } else if (e instanceof FirebaseAuthInvalidUserException) {
-            content = "Please check your Email ID and Password.";
+            content = getString(R.string.error_auth_invalid);
         }
 
         if (content != null) {
             new MaterialDialog.Builder(this)
-                    .title("Error")
+                    .title(getString(R.string.error))
                     .content(content)
                     .neutralText(getString(R.string.ok))
                     .show();
@@ -182,7 +182,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.Auth
     private void navToLogin() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame_auth, new LoginFragment())
-                .addToBackStack("login-fragment")
+                .addToBackStack(AppConstants.TAG_LOGIN_FRAGMENT)
                 .commit();
     }
 

@@ -3,6 +3,11 @@ package in.snotes.snotes.utils;
 public final class AppConstants {
 
     public static final String USER_NOTES = "notes";
+    public static final String TAG_REGISTER_FRAGMENT = "register-fragment";
+    public static final String TAG_LOGIN_FRAGMENT = "login-fragment";
+    public static final String TAG_DATE_PICKER = "date-picker";
+    public static final String TAG_TIME_PICKER = "time-picker";
+    public static final String DEFAULT_PIN = "0000";
 
     private AppConstants() {
     }

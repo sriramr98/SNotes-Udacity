@@ -60,7 +60,7 @@ public class Utils {
 
         Intent feedback = new Intent(Intent.ACTION_SENDTO);
         feedback.setData(uri);
-        context.startActivity(Intent.createChooser(feedback, "Share Feedback"));
+        context.startActivity(Intent.createChooser(feedback, context.getString(R.string.share_feedback)));
     }
 
 

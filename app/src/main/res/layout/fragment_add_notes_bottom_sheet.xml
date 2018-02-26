@@ -24,7 +24,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:tint="#737373"
+            android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_remainder" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/set_remainder"
-            android:textColor="#737373"
+            android:textColor="@color/icon_color_sheet"
             android:textSize="@dimen/textSize" />
 
     </LinearLayout>
@@ -55,7 +55,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:tint="#737373"
+            android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_delete" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/delete"
-            android:textColor="#737373"
+            android:textColor="@color/icon_color_sheet"
             android:textSize="@dimen/textSize" />
 
     </LinearLayout>
@@ -85,7 +85,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:tint="#737373"
+            android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_copy" />
 
         <TextView
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/copy"
-            android:textColor="#737373"
+            android:textColor="@color/icon_color_sheet"
             android:textSize="@dimen/textSize" />
 
     </LinearLayout>
@@ -115,7 +115,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
-            android:tint="#737373"
+            android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_share" />
 
         <TextView
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/share"
-            android:textColor="#737373"
+            android:textColor="@color/icon_color_sheet"
             android:textSize="@dimen/textSize" />
     </LinearLayout>
 </LinearLayout>

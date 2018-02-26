@@ -55,16 +55,16 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public void removeNote(int position) {
-        notesList.remove(position);
-        notifyItemRemoved(position);
-    }
-
-
-    public void restoreNote(Note note, int position) {
-        notesList.add(position, note);
-        notifyItemInserted(position);
-    }
+//    public void removeNote(int position) {
+//        notesList.remove(position);
+//        notifyItemRemoved(position);
+//    }
+//
+//
+//    public void restoreNote(Note note, int position) {
+//        notesList.add(position, note);
+//        notifyItemInserted(position);
+//    }
 
     public interface NotesListener {
         void onNoteClicked(Note note);
@@ -108,7 +108,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
             } else {
                 tvNoteContent.setVisibility(View.VISIBLE);
                 if (note.getLocked()) {
-                    String protectedContent = "******************************************************";
+                    String protectedContent = context.getString(R.string.locked_note_text);
                     tvNoteContent.setText(protectedContent);
                 } else {
                     tvNoteContent.setText(Html.fromHtml(content));

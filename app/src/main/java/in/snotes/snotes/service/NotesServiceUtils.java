@@ -10,7 +10,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 import in.snotes.snotes.utils.AppConstants;
 import in.snotes.snotes.utils.SharedPrefsUtils;
@@ -33,7 +32,7 @@ public final class NotesServiceUtils {
             return;
         }
 
-        String password = "0000";
+        String password = AppConstants.DEFAULT_PIN;
         HashMap<String, Object> user = new HashMap<>();
         user.put("name", userName);
         user.put("pin", password);

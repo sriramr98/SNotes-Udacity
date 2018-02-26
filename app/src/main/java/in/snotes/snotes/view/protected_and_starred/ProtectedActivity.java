@@ -232,9 +232,9 @@ public class ProtectedActivity extends AppCompatActivity implements NotesAdapter
 
     private void showPinErrorDialog() {
         new MaterialDialog.Builder(this)
-                .title("Error")
-                .content("The pin entered was wrong. Please try again")
-                .neutralText("Ok")
+                .title(getString(R.string.error))
+                .content(getString(R.string.wrong_pin))
+                .neutralText(getString(R.string.ok))
                 .show();
     }
 

@@ -55,7 +55,7 @@ public final class FirebaseUtils {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Timber.i("Added note successfully");
-                        Toast.makeText(context, "Added note successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.added_note), Toast.LENGTH_SHORT).show();
                     } else {
                         Timber.e(task.getException());
                     }
@@ -95,10 +95,10 @@ public final class FirebaseUtils {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Timber.i("Note updated successfully");
-                        Toast.makeText(context, "Edited note", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.edited_note), Toast.LENGTH_SHORT).show();
                     } else {
                         Timber.e("Error updating note %s", task.getException().getMessage());
-                        Toast.makeText(context, "Error editing note", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.error_editing_note), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -117,9 +117,9 @@ public final class FirebaseUtils {
                 .removeValue()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(context, "Deleted note successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.deleted_note), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context, "Error deleting note", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.error_deleting_note), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -183,7 +183,7 @@ public final class FirebaseUtils {
 
         Notification notification = new NotificationCompat.Builder(context, channelId)
                 .setContentTitle(title)
-                .setContentText("Ping Ping")
+                .setContentText(context.getString(R.string.ping_ping))
                 .setSmallIcon(R.drawable.ic_done_white_24dp)
                 .setContentIntent(resultantPendingIntent)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))

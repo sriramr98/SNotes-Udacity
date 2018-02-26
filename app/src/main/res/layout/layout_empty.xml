@@ -11,6 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
+        android:contentDescription="@string/notes_empty"
         app:srcCompat="@drawable/ic_note" />
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
-        android:text="You have no notes here"
+        android:text="@string/notes_empty"
         android:textSize="24sp" />
 
 </LinearLayout>

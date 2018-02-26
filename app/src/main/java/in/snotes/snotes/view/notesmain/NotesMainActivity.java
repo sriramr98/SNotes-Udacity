@@ -117,7 +117,6 @@ public class NotesMainActivity extends AppCompatActivity
         adapter = new NotesAdapter(this, this);
         rvNotesList.setAdapter(adapter);
 
-        //TODO load data from REALTIME DATABASE
         String uid = mAuth.getCurrentUser().getUid();
 
         pbNotes.setVisibility(View.VISIBLE);
@@ -304,7 +303,6 @@ public class NotesMainActivity extends AppCompatActivity
         startActivity(i);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -348,8 +346,10 @@ public class NotesMainActivity extends AppCompatActivity
                     .inputType(InputType.TYPE_CLASS_NUMBER)
                     .input(null, null, (dialog, input) -> {
                         // Do something
-                        String pin = String.valueOf(SharedPrefsUtils.getPin());
-                        if (Objects.equals(input.toString(), pin)) {
+                        String pin = SharedPrefsUtils.getPin();
+                        Timber.i("pin is %s and pin from sp is %s", String.valueOf(input).trim(), pin);
+
+                        if (Objects.equals(String.valueOf(input).trim(), pin)) {
                             goToAddNotesOnEdit(note);
                         } else {
                             showPinErrorDialog();
@@ -368,9 +368,9 @@ public class NotesMainActivity extends AppCompatActivity
 
     private void showPinErrorDialog() {
         new MaterialDialog.Builder(this)
-                .title("Error")
-                .content("The pin entered was wrong. Please try again")
-                .neutralText("Ok")
+                .title(getString(R.string.error))
+                .content(getString(R.string.wrong_pin))
+                .neutralText(getString(R.string.ok))
                 .show();
     }
 

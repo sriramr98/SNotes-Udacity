@@ -74,33 +74,33 @@ public class RegisterFragment extends Fragment {
 
         // handle edge cases
         if (isEmpty(name)) {
-            layoutName.setError("Name cannot be empty");
+            layoutName.setError(getString(R.string.name_empty));
             return;
         }
 
         if (isEmpty(email)) {
-            layoutEmail.setError("Email cannot be empty");
+            layoutEmail.setError(getString(R.string.email_empty_error));
             return;
         }
 
         if (!(Patterns.EMAIL_ADDRESS.matcher(email).matches())) {
-            layoutEmail.setError("Enter a valid email address");
+            layoutEmail.setError(getString(R.string.email_invalid_error));
             return;
         }
 
         if (isEmpty(password)) {
-            layoutPassword.setError("Password cannot be empty");
+            layoutPassword.setError(getString(R.string.password_empty_error));
             return;
         }
 
         if (isEmpty(confirmPassword)) {
-            layoutConfirmPassword.setError("Confirm Password cannot be empty");
+            layoutConfirmPassword.setError(getString(R.string.password_empty_error));
             return;
         }
 
         if (!Objects.equals(password, confirmPassword)) {
-            layoutPassword.setError("Passwords should match");
-            layoutConfirmPassword.setError("Passwords should match");
+            layoutPassword.setError(getString(R.string.passwords_match_error));
+            layoutConfirmPassword.setError(getString(R.string.passwords_match_error));
             return;
         }
 

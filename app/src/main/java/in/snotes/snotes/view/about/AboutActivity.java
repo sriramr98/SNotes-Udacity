@@ -65,7 +65,6 @@ public class AboutActivity extends AppCompatActivity implements AboutAdapter.Abo
         final String SHARE = this.getString(R.string.share_title);
         final String GITHUB = this.getString(R.string.follow_on_github);
         final String REPORT = this.getString(R.string.report_title);
-        final String DONATE = this.getString(R.string.donate);
 
         if (Objects.equals(title, RATE)) {
             takeThemToGooglePlay();
@@ -91,18 +90,18 @@ public class AboutActivity extends AppCompatActivity implements AboutAdapter.Abo
     }
 
     private void shareAppLink() {
-        Toast.makeText(this, "Just wait for a little while. This app will be up on Google Play Soon", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.yet_to_release), Toast.LENGTH_SHORT).show();
     }
 
     private void showLicense() {
         new EasyLicensesDialogCompat(this)
-                .setTitle("Licenses")
+                .setTitle(getString(R.string.licenses))
                 .setPositiveButton(android.R.string.ok, null)
                 .show();
     }
 
     private void takeThemToGooglePlay() {
-        Toast.makeText(this, "Just wait for a little while. This app will be up on Google Play Soon", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.yet_to_release), Toast.LENGTH_SHORT).show();
     }
 
 

@@ -59,17 +59,17 @@ public class LoginFragment extends Fragment {
         // validating edge cases
 
         if (TextUtils.isEmpty(email) || email.isEmpty()) {
-            layoutEmail.setError("Email cannot be empty");
+            layoutEmail.setError(getString(R.string.email_empty_error));
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            layoutEmail.setError("Enter a valid Email ID");
+            layoutEmail.setError(getString(R.string.email_invalid_error));
             return;
         }
 
         if (TextUtils.isEmpty(password) || password.isEmpty()) {
-            layoutPassword.setError("Password cannot be empty");
+            layoutPassword.setError(getString(R.string.password_empty_error));
             return;
         }
 

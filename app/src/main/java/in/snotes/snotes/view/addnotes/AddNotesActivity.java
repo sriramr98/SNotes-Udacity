@@ -157,8 +157,8 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
     private void updateAllWidgets() {
         Intent updateIntent = new Intent(this, NoteWidget.class);
         updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(),NoteWidget.class));
-        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), NoteWidget.class));
+        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         sendBroadcast(updateIntent);
     }
 
@@ -203,9 +203,9 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
         final int start = edtContent.getSelectionStart();
         final int end = edtContent.getSelectionEnd();
         new MaterialDialog.Builder(this)
-                .title("Enter a link")
+                .title(getString(R.string.enter_a_link))
                 .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("www.google.com", "", (dialog, input) -> {
+                .input(null, null, (dialog, input) -> {
                     // Do something
                     if (TextUtils.isEmpty(input.toString())) {
                         return;
@@ -405,7 +405,7 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
 
     private void shareNote() {
 
-        String contentToSend = "Title :" + titleNotesAdd.getText().toString().trim() + " \nContent :" + (Html.fromHtml(edtContent.toHtml().trim()).toString());
+        String contentToSend = getString(R.string.title) + " :" + titleNotesAdd.getText().toString().trim() + " \n" + getString(R.string.content) + " :" + (Html.fromHtml(edtContent.toHtml().trim()).toString());
         Intent i = new Intent();
         i.setAction(Intent.ACTION_SEND);
         i.putExtra(Intent.EXTRA_TEXT, contentToSend);
@@ -418,9 +418,9 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
         ClipData clip = ClipData.newPlainText(titleNotesAdd.getText().toString().trim(), Html.fromHtml(edtContent.toHtml().trim()));
         if (clipboardManager != null) {
             clipboardManager.setPrimaryClip(clip);
-            Toast.makeText(this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.copied_to_clipboard), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Could'nt copy to clipboard", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.error_copying_clipboard), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -435,16 +435,16 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
                     now.get(Calendar.MONTH),
                     now.get(Calendar.DAY_OF_MONTH)
             );
-            dpd.show(getFragmentManager(), "Datepickerdialog");
+            dpd.show(getFragmentManager(), AppConstants.TAG_DATE_PICKER);
         }
     }
 
     private void showRemainderCancelDialog() {
         new MaterialDialog.Builder(this)
-                .title("Remainder set")
-                .content("Remainder already set for " + Utils.getDate(currentNote.getRemainderTime()) + ". Do you want to cancel the remainder?")
-                .positiveText("Yes")
-                .negativeText("No")
+                .title(getString(R.string.remainder_set))
+                .content(getString(R.string.remainder_set_for) + Utils.getDate(currentNote.getRemainderTime()) + getString(R.string.wanna_cancel_remainder))
+                .positiveText(getString(R.string.yes))
+                .negativeText(getString(R.string.no))
                 .onPositive((dialog, which) -> {
                     // updating local note
                     currentNote.setRemainderSet(false);
@@ -454,7 +454,7 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
                     Intent cancelService = new Intent(this, NotesService.class);
                     cancelService.setAction(NotesService.ACTION_CANCEL_REMAINDER);
                     cancelService.putExtra(AppConstants.NOTE_EXTRA, currentNote);
-                    Toast.makeText(this, "Remainder cancelled", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.remainder_cancelled), Toast.LENGTH_SHORT).show();
                 }).show();
     }
 
@@ -474,7 +474,7 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
                 now.get(Calendar.SECOND),
                 false
         );
-        dpd.show(getFragmentManager(), "Datepickerdialog");
+        dpd.show(getFragmentManager(), AppConstants.TAG_TIME_PICKER);
     }
 
 
@@ -489,7 +489,7 @@ public class AddNotesActivity extends AppCompatActivity implements ColorChooserD
 
         Utils.scheduleAlarm(this, currentNote);
 
-        Toast.makeText(this, "Remainder set", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.remainder_set), Toast.LENGTH_SHORT).show();
 
         FirebaseUtils.updateNote(this, currentNote);
     }

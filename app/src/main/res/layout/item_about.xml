@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
+    android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
     android:minHeight="?attr/listPreferredItemHeight"
     android:orientation="horizontal">
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="16dp"
-        android:contentDescription="About Logo"
+        android:contentDescription="@string/about_logo"
         app:srcCompat="@drawable/ic_note" />
 
     <LinearLayout
