@@ -30,11 +30,6 @@ public class AddNotesBottomSheet extends BottomSheetDialogFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -45,7 +40,8 @@ public class AddNotesBottomSheet extends BottomSheetDialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Note note = getArguments().getParcelable("note");
+        Note note = getArguments().
+                getParcelable("note");
 
         if (note == null) {
             return;

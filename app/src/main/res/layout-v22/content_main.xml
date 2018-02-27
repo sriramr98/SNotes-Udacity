@@ -34,6 +34,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
+        android:accessibilityTraversalBefore="@id/rv_notes_list"
         android:contentDescription="@string/add_new_note"
         android:src="@drawable/ic_add" />
 

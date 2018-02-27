@@ -120,6 +120,8 @@ public class NotesMainActivity extends AppCompatActivity
         String uid = mAuth.getCurrentUser().getUid();
 
         pbNotes.setVisibility(View.VISIBLE);
+        pbNotes.announceForAccessibility(getString(R.string.notes_loading));
+
         notesRef = users.child(uid)
                 .child(AppConstants.USER_NOTES);
 
@@ -137,20 +139,6 @@ public class NotesMainActivity extends AppCompatActivity
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        notesRef.addChildEventListener(listener);
-
-    }
-
-    @Override
-    protected void onPause() {
-//        notes.clear();
-//        Timber.i("Leaving activiy with notes %s", notes.toString());
-//        notesRef.removeEventListener(listener);
-        super.onPause();
-    }
 
     private ChildEventListener listener = new ChildEventListener() {
         @Override

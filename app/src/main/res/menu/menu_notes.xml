@@ -6,34 +6,33 @@
     <item
         android:id="@+id/action_lock"
         android:icon="@drawable/ic_lock_open"
-        android:title="Lock"
+        android:title="@string/lock"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_star"
         android:icon="@drawable/ic_star_open"
-        android:title="Star"
+        android:title="@string/star"
         app:showAsAction="always" />
 
 
     <item
         android:id="@+id/action_color_choser"
         android:icon="@drawable/ic_color_choser"
-        android:title="Color Choser"
+        android:title="@string/color_choser"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_archive"
         android:icon="@drawable/ic_archive"
-        android:title="Archive"
+        android:title="@string/archive"
         app:showAsAction="always" />
 
 
     <item
         android:id="@+id/action_menu"
         android:icon="@drawable/ic_menu"
-        android:title="Menu"
+        android:title="@string/menu"
         app:showAsAction="always" />
-
 
 </menu>

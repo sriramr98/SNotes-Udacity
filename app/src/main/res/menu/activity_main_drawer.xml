@@ -7,41 +7,41 @@
         <item
             android:id="@+id/nav_notes"
             android:icon="@drawable/ic_note"
-            android:title="Notes" />
+            android:title="@string/notes" />
         <item
             android:id="@+id/nav_favourites"
             android:icon="@drawable/ic_star_closed"
-            android:title="Favourites" />
+            android:title="@string/favourites" />
         <item
             android:id="@+id/nav_locked"
             android:icon="@drawable/ic_lock_black"
-            android:title="Locked" />
+            android:title="@string/locked" />
 
     </group>
 
-    <item android:title="Settings">
+    <item android:title="@string/settings">
 
         <menu>
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_settings"
-                android:title="Settings" />
+                android:title="@string/settings" />
 
         </menu>
 
     </item>
 
-    <item android:title="Suggestions">
+    <item android:title="@string/suggestions">
         <menu>
 
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info"
-                android:title="About" />
+                android:title="@string/about" />
             <item
                 android:id="@+id/nav_feedback"
                 android:icon="@drawable/ic_feedback"
-                android:title="Feedback" />
+                android:title="@string/feedback" />
         </menu>
     </item>
 

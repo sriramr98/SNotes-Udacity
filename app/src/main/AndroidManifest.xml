@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="in.snotes.snotes">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".SNotesApplication"
         android:allowBackup="true"
@@ -49,5 +51,4 @@
             android:value="ac0fd1c27fab559e476a05958774e56a8357edbe" />
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

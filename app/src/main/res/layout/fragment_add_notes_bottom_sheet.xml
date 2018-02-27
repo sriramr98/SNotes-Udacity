@@ -24,6 +24,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/set_remainder"
             android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_remainder" />
 
@@ -55,6 +56,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/delete"
             android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_delete" />
 
@@ -85,6 +87,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/copy"
             android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_copy" />
 
@@ -115,6 +118,7 @@
             android:layout_height="@dimen/bottomSheetImage"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="32dp"
+            android:contentDescription="@string/share"
             android:tint="@color/icon_color_sheet"
             app:srcCompat="@drawable/ic_share" />
 
