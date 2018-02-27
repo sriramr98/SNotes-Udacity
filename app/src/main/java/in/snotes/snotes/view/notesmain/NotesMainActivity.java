@@ -44,7 +44,7 @@ import in.snotes.snotes.utils.Utils;
 import in.snotes.snotes.view.about.AboutActivity;
 import in.snotes.snotes.view.addnotes.AddNotesActivity;
 import in.snotes.snotes.view.auth.AuthActivity;
-import in.snotes.snotes.view.protected_and_starred.ProtectedActivity;
+import in.snotes.snotes.view.protectedandstarred.ProtectedActivity;
 import timber.log.Timber;
 
 public class NotesMainActivity extends AppCompatActivity

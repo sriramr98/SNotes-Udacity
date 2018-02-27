@@ -55,17 +55,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-//    public void removeNote(int position) {
-//        notesList.remove(position);
-//        notifyItemRemoved(position);
-//    }
-//
-//
-//    public void restoreNote(Note note, int position) {
-//        notesList.add(position, note);
-//        notifyItemInserted(position);
-//    }
-
     public interface NotesListener {
         void onNoteClicked(Note note);
     }

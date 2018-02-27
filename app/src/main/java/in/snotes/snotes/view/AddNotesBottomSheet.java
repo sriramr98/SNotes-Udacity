@@ -26,9 +26,6 @@ public class AddNotesBottomSheet extends BottomSheetDialogFragment {
     TextView sheetTvRemaider;
     private BottomSheetListener mListener;
 
-    public AddNotesBottomSheet() {
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

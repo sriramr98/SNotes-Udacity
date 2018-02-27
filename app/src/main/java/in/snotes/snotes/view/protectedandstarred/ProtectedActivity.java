@@ -1,4 +1,4 @@
-package in.snotes.snotes.view.protected_and_starred;
+package in.snotes.snotes.view.protectedandstarred;
 
 import android.content.Intent;
 import android.os.Bundle;

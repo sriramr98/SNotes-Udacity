@@ -25,7 +25,7 @@
         </activity>
         <activity android:name=".view.addnotes.AddNotesActivity" />
         <activity android:name=".view.auth.AuthActivity" />
-        <activity android:name=".view.protected_and_starred.ProtectedActivity" />
+        <activity android:name=".view.protectedandstarred.ProtectedActivity" />
         <activity android:name=".settings.PreferenceActivity" />
         <activity android:name=".view.about.AboutActivity" />
 
